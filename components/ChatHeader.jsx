@@ -12,6 +12,7 @@ import Avatar from "./Avatar";
 import ChatMenu from "./ChatMenu";
 import Icon from "./Icon";
 import { useScreenSize } from "@/context/screenSizeContext";
+import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 
 const ChatHeader = (props) => {
     const [showMenu, setShowMenu] = useState(false);
@@ -19,13 +20,41 @@ const ChatHeader = (props) => {
     const { isSmallScreen, setOpenChatBox, setShowAttachmentMenu } = useScreenSize();
     const online = users[data.user.uid]?.isOnline;
     const user = users[data.user.uid];
+
+    const myMeeting = async (element) => {
+        const appID = 1224183727;
+        const serverSecret = "a60724fe8bf58393f102f678ae74d24b";
+
+        const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+            appID,
+            serverSecret,
+            '123456abc',
+            Date.now(),
+            "Ravi",
+        );
+        const zc = ZegoUIKitPrebuilt.create(kitToken);
+        zc.joinRoom({
+            container: element,
+            sharedLinks: [
+                {
+                    name: 'Copy Link',
+                    url: "",
+                }
+            ],
+            scenario: {
+                mode: ZegoUIKitPrebuilt.OneONoneCall,
+            }
+        });
+    };
+
+
     return (
         <div className="flex justify-between items-center pb-5 border-b border-white/[0.05]">
             {user && (
                 <div className="flex items-center gap-3">
-                    {isSmallScreen && (<IoArrowBack size={22} onClick={()=>{
-                        setOpenChatBox(false) 
-                        setShowAttachmentMenu(false)
+                    {isSmallScreen && (<IoArrowBack size={22} onClick={() => {
+                        setOpenChatBox(false);
+                        setShowAttachmentMenu(false);
                     }} />)}
                     <Avatar size="large" user={user} />
                     <div>
@@ -40,7 +69,6 @@ const ChatHeader = (props) => {
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
-                    // onClick={() => }
                     icon={
                         <GoDeviceCameraVideo
                             size={23}
@@ -52,7 +80,6 @@ const ChatHeader = (props) => {
                 <Icon
                     size="large"
                     className={`${showMenu ? "bg-c1" : ""}`}
-                    // onClick={() => }
                     icon={
                         <LuPhone
                             size={19}

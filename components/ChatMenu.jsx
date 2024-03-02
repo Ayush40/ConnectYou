@@ -162,7 +162,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
       <div
         className={`w-[200px] absolute top-[70px] right-5 bg-c0 z-10 rounded-md overflow-hidden`}
       >
-   
+
         <ul className="flex flex-col py-2">
           {!IamBlocked && (
             <li
@@ -198,7 +198,7 @@ const ChatMenu = ({ setShowMenu, showMenu }) => {
             />
             Set Theme
           </li>
-      
+
         </ul>
       </div>
     </ClickAwayListener>
