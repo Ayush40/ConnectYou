@@ -1,4 +1,5 @@
 import Loader from "@/components/Loader";
+import ToastMessage from "@/components/ToastMessage";
 import { useAuth } from "@/context/authContext";
 import { profileColors } from "@/utils/constants";
 import {
@@ -13,9 +14,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useCallback, useEffect } from "react";
 import { IoLogoGoogle } from "react-icons/io";
-import { auth, db, storage } from "../firebase/firebase";
 import { toast } from "react-toastify";
-import ToastMessage from "@/components/ToastMessage";
+import { auth, db, storage } from "../firebase/firebase";
 
 const gProvider = new GoogleAuthProvider();
 
@@ -41,7 +41,7 @@ const Register = () => {
         const confirmPassword = e.target[3].value;
         const file = e.target[4]?.files?.[0];
         const colorIndex = Math.floor(Math.random() * profileColors.length);
-        
+
         const validEmailDomains = ["@gmail.com", "@yahoo.com", "@outlook.com", "@icloud.com"];
         const isValidEmail = validEmailDomains.some((domain) => email.endsWith(domain));
 

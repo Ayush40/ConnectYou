@@ -1,8 +1,7 @@
-import React from 'react'
-import { useRef } from 'react';
 import { useChatContext } from '@/context/chatContext';
-import Image from 'next/image';
 import mapImage from '@/public/map.png';
+import Image from 'next/image';
+import { useRef } from 'react';
 
 const MapPopup = ({ setOpenMapPopup, shareLocation }) => {
     const popUpRef = useRef(null);
@@ -10,7 +9,7 @@ const MapPopup = ({ setOpenMapPopup, shareLocation }) => {
     const onShare = () => {
         shareLocation();
         setOpenMapPopup(false);
-    }
+    };
     return (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex items-center justify-center bg-opacity-50 bg-gray-800">
             <div className="bg-[#202329] p-8 rounded-md shadow-lg" ref={popUpRef}>
@@ -44,7 +43,7 @@ const MapPopup = ({ setOpenMapPopup, shareLocation }) => {
             </div>
         </div>
 
-    )
-}
+    );
+};
 
-export default MapPopup
+export default MapPopup;

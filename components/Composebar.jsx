@@ -19,11 +19,11 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
-import { TbSend } from "react-icons/tb";
+import { useRef } from "react";
 import { IoMicOutline } from "react-icons/io5";
+import { TbSend } from "react-icons/tb";
 import { v4 as uuid } from "uuid";
 import Icon from "./Icon";
-import { useRef } from "react";
 
 let typingTimeout = null;
 
@@ -69,9 +69,6 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       console.error('Speech recognition error:', error);
     }
   };
-
-
-
 
   /**
    * Handles sending a new chat message.

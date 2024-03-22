@@ -119,7 +119,7 @@ const ChatFooter = () => {
 
           // Generate the Google Maps link
           const mapLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
-          
+
           // Code for fetching and rendering map
           // const url = "https://graphhopper.com/api/1/geocode?reverse=true&point=28.638549166718185,77.2747846991807&key=8a78a848-c3bb-4dd8-92a5-bb5eee5190df";
 
@@ -328,8 +328,8 @@ const ChatFooter = () => {
           </div>
 
           <div onClick={() => {
-            setOpenPopup(true)
-            setShowAttachmentMenu(false)
+            setOpenPopup(true);
+            setShowAttachmentMenu(false);
           }}>
             <Icon
               size="large"
