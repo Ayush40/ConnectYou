@@ -56,35 +56,35 @@ const LeftNav = () => {
         }
 
         try {
-            toast.promise(
-                async () => {
-                    const userDocRef = doc(db, "users", currentUser.uid);
-                    await updateDoc(userDocRef, obj);
-                    setCurrentUser(obj);
+            const userDocRef = doc(db, "users", currentUser.uid);
+            await updateDoc(userDocRef, obj);
+            setCurrentUser(obj);
 
-                    if ("photo-remove") {
-                        await updateProfile(authUser, {
-                            photoURL: null,
-                        });
-                    }
+            if (type === "photo-remove") {
+                await updateProfile(authUser, {
+                    photoURL: null,
+                });
+            }
 
-                    if (type === "name") {
-                        await updateProfile(authUser, {
-                            displayName: value,
-                        });
-                        setNameEdited(false);
-                    }
-                },
-                {
+            if (type === "name") {
+                await updateProfile(authUser, {
+                    displayName: value,
+                });
+                setNameEdited(false);
+            }
+
+            // Resolve the promise when updating the color
+            if (type === "color") {
+                toast.success("Profile updated successfully.");
+            } else {
+                toast.promise(null, {
                     pending: "Updating profile.",
                     success: "Profile updated successfully.",
-                    error: "Profile udpate failed.",
-                },
-                {
-                    autoClose: 3000,
-                }
-            );
+                    error: "Profile update failed.",
+                });
+            }
         } catch (error) {
+            toast.error("Profile update failed.");
             // console.error(error);
         }
     };
