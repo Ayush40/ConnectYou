@@ -76,15 +76,10 @@ const LeftNav = () => {
             // Resolve the promise when updating the color
             if (type === "color") {
                 toast.success("Profile updated successfully.");
-            } else {
-                toast.promise(null, {
-                    pending: "Updating profile.",
-                    success: "Profile updated successfully.",
-                    error: "Profile update failed.",
-                });
-            }
+            } 
+        
         } catch (error) {
-            toast.error("Profile update failed.");
+            // toast.error("Profile update failed.");
             // console.error(error);
         }
     };
@@ -94,11 +89,14 @@ const LeftNav = () => {
             if (file) {
                 const storageRef = ref(storage, currentUser.displayName);
                 const uploadTask = uploadBytesResumable(storageRef, file);
+                
+                const uploadPromise = new Promise((resolve, reject) => {
                 uploadTask.on(
                     "state_changed",
                     (snapshot) => { },
                     (error) => {
                         // console.error(error);
+                        reject(error);
                     },
                     () => {
                         getDownloadURL(uploadTask.snapshot.ref).then(
@@ -107,10 +105,17 @@ const LeftNav = () => {
                                 await updateProfile(authUser, {
                                     photoURL: downloadURL,
                                 });
+                                resolve();
                             }
                         );
                     }
                 );
+            });
+                toast.promise(uploadPromise, {
+                    pending: "Updating profile.",
+                    success: "Profile updated successfully.",
+                    error: "Profile update failed.",
+                });
             }
         } catch (error) {
             // console.error(error);

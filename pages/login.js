@@ -97,7 +97,7 @@ const Login = () => {
             <div className="min-h-[120vh] md:min-h-screen flex justify-center items-center bg-c1">
                 <ToastMessage />
                 <div className="flex items-center flex-col w-10/12 md:w-auto">
-                    <div className="text-center">
+                    <div className="text-center mb-6">
                         <div className="text-4xl font-bold">
                             Login to Your Account
                         </div>
@@ -105,8 +105,8 @@ const Login = () => {
                             Connect and chat with anyone, anywhere
                         </div>
                     </div>
-                    <div className="flex flex-col items-center gap-2 w-full mt-10 mb-5">
-                        {/* <div
+                    {/* <div className="flex flex-col items-center gap-2 w-full mt-10 mb-5">
+                        <div
                             className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 w-full h-14 rounded-md cursor-pointer p-[1px]"
                             onClick={signInWithGoogle}
                         >
@@ -114,13 +114,13 @@ const Login = () => {
                                 <IoLogoGoogle size={24} />
                                 <span>Login with Google</span>
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                     <div className="flex items-center gap-1">
                         <span className="w-5 h-[1px] bg-c3"></span>
                         <span className="text-c3 font-semibold">OR</span>
                         <span className="w-5 h-[1px] bg-c3"></span>
-                    </div>
+                    </div> */}
                     <form
                         className="flex flex-col items-center gap-3 w-full max-w-md mt-5 px-5"
                         onSubmit={handleSubmit}
