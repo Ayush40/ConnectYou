@@ -78,6 +78,11 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
    */
   const handleSend = async () => {
     setShowAttachmentMenu(false);
+
+    // Clear the input text field immediately
+    const textToSend = inputText;
+    setInputText('');
+
     if (attachment) {
       const storageRef = ref(storage, `${uuid()}/${selectedFileType}`);
       const uploadTask = uploadBytesResumable(storageRef, attachment);
@@ -96,7 +101,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
                 id: uuid(),
-                text: inputText,
+                text: textToSend,
                 sender: currentUser.uid,
                 date: Timestamp.now(),
                 fileUrl: downloadURL,
@@ -116,7 +121,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
-          text: inputText,
+          text: textToSend,
           sender: currentUser.uid,
           date: Timestamp.now(),
           fileUrl: selectedGif,
@@ -130,7 +135,7 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
           id: uuid(),
-          text: inputText,
+          text: textToSend,
           sender: currentUser.uid,
           date: Timestamp.now(),
           read: false,
@@ -138,7 +143,6 @@ const Composebar = ({ selectedFileType, setSelectedFile, setSelectedGif, selecte
       });
     }
 
-    // ... (rest of the function remains the same)
   };
 
   const handleEdit = async () => {
